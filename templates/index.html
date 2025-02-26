@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vigil</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+</head>
+
+<body style="background-color: {{ bg_color }}">
+    <h1>Welcome to Vigil, {{ current_user.username }}!</h1>
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+    <form action="/customize" method="POST">
+        <label>Background Color:</label>
+        <input type="color" name="bg_color" value="{{ bg_color }}">
+        <label>Layout:</label>
+        <select name="layout">
+            <option value="grid" {% if layout=='grid' %}selected{% endif %}>Grid</option>
+            <option value="list" {% if layout=='list' %}selected{% endif %}>List</option>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
+
+    <div class="container {{ layout }}">
+        <section class="news">
+            <h2>Latest News</h2>
+            <div id="news-content"></div>
+        </section>
+
+        <section class="social">
+            <h2>Social Buzz</h2>
+            <div id="social-content"></div>
+        </section>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
